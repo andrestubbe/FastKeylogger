@@ -1,7 +1,8 @@
 package fastkeylogger;
 
 import fastkeyboard.FastKeyboard;
-import fastkeyboard.KeyboardEvent;
+import fastkeyboard.FastKeyboardImpl;
+import fastkeyboard.FastKeyboardListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,17 +13,16 @@ import java.util.Map;
  * Higher-level typing recorder that transforms raw keyboard events into
  * behavioral typing signatures.
  */
-public class FastKeylogger {
+public class FastKeylogger implements FastKeyboardListener {
 
     private final FastKeyboard keyboard;
     private final List<TypingListener> listeners = new ArrayList<>();
     
-    // Map to track dwell time: KeyCode -> StartTimestamp
+    // Map to track dwell time: VirtualKeyCode -> StartTimestamp
     private final Map<Integer, Long> activeKeys = new HashMap<>();
 
     public FastKeylogger() {
-        this.keyboard = new FastKeyboard();
-        setupInternalListener();
+        this.keyboard = new FastKeyboardImpl();
     }
 
     public void addListener(TypingListener listener) {
@@ -30,40 +30,39 @@ public class FastKeylogger {
     }
 
     public void start() {
-        keyboard.start();
+        keyboard.startListening(this);
     }
 
     public void stop() {
-        keyboard.stop();
+        keyboard.stopListening();
     }
 
-    private void setupInternalListener() {
-        keyboard.addListener(event -> {
-            if (event.isKeyDown()) {
-                activeKeys.put(event.virtualKeyCode(), event.timestamp());
-            } else {
-                Long startTime = activeKeys.remove(event.virtualKeyCode());
-                if (startTime != null) {
-                    long duration = event.timestamp() - startTime;
-                    processEvent(event, duration);
-                }
+    @Override
+    public void onKeyEvent(long deviceHandle, int vKey, int makeCode, boolean isPressed, boolean isE0, long timestamp, String keyChar) {
+        if (isPressed) {
+            activeKeys.put(vKey, timestamp);
+        } else {
+            Long startTime = activeKeys.remove(vKey);
+            if (startTime != null) {
+                long duration = timestamp - startTime;
+                processEvent(vKey, makeCode, timestamp, duration, keyChar);
             }
-        });
+        }
     }
 
-    private void processEvent(KeyboardEvent raw, long duration) {
-        char c = raw.translatedChar();
-        boolean isCorrection = (raw.virtualKeyCode() == 0x08); // VK_BACK
+    private void processEvent(int vKey, int makeCode, long timestamp, long duration, String keyChar) {
+        char c = (keyChar != null && !keyChar.isEmpty()) ? keyChar.charAt(0) : 0;
+        boolean isCorrection = (vKey == 0x08); // VK_BACK
 
         // We only care about characters or the backspace correction
         if (c != 0 || isCorrection) {
             TypingEvent event = new TypingEvent(
                 c,
-                raw.timestamp(),
+                timestamp,
                 duration,
                 isCorrection,
-                raw.virtualKeyCode(),
-                raw.scanCode()
+                vKey,
+                makeCode
             );
             
             for (TypingListener listener : listeners) {

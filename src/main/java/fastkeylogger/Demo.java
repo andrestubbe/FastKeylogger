@@ -6,23 +6,29 @@ package fastkeylogger;
 public class Demo {
     public static void main(String[] args) {
         System.out.println("⚡ FastKeylogger v0.1.0 — Behavioral Typing Sensor");
-        System.out.println("Recording typing rhythm... (Press CTRL+C to stop)");
+        System.out.println("Status: LISTENING (System-wide)");
+        System.out.println("Note: This demo shows text reconstruction and dwell-time metrics.");
         System.out.println("--------------------------------------------------");
 
         FastKeylogger logger = new FastKeylogger();
+        TextReconstructor reconstructor = new TextReconstructor();
         
         logger.addListener(event -> {
-            if (event.isCorrection()) {
-                System.out.print("\b \b"); // Visual backspace in some terminals
-                System.err.println(" [CORRECTION] " + event.durationMs() + "ms");
-            } else {
-                System.out.println(event + " -> " + event.character());
-            }
+            reconstructor.process(event);
+            
+            // Clear line and redraw status
+            System.out.print("\r");
+            String text = reconstructor.getText();
+            if (text.length() > 50) text = "..." + text.substring(text.length() - 47);
+            
+            String metrics = String.format(" [Dwell: %3dms] [Correction: %b]", 
+                event.durationMs(), event.isCorrection());
+            
+            System.out.print("TEXT: " + String.format("%-50s", text) + metrics);
         });
 
         logger.start();
 
-        // Keep main thread alive
         try {
             Thread.currentThread().join();
         } catch (InterruptedException e) {
