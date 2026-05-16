@@ -1,4 +1,4 @@
-# FastKeylogger ⚡⌨️
+# FastKeylogger v0.1.0 ⚡⌨️
 
 > **The behavioral typing sensor for the FastJava ecosystem.**
 
