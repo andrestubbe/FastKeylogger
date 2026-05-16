@@ -1,7 +1,8 @@
 package fastkeylogger;
 
 /**
- * High-level helper to reconstruct the typed string from a stream of TypingEvents.
+ * High-level helper to reconstruct the typed string from a stream of
+ * TypingEvents.
  */
 public class TextReconstructor {
     private final StringBuilder buffer = new StringBuilder();

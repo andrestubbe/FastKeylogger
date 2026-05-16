@@ -7,7 +7,7 @@
 
     <groupId>com.github.andrestubbe</groupId>
     <artifactId>fastkeylogger</artifactId>
-    <version>0.1.0</version>
+    <version>v0.1.0</version>
     <packaging>jar</packaging>
 
     <name>FastKeylogger</name>
@@ -28,18 +28,32 @@
     </repositories>
 
     <dependencies>
+        <!-- FastJSON - Ultra-fast serialization -->
+        <dependency>
+            <groupId>io.github.andrestubbe</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>v0.1.0</version>
+        </dependency>
+
+        <!-- FastIO - Ultra-fast native file I/O -->
+        <dependency>
+            <groupId>io.github.andrestubbe</groupId>
+            <artifactId>fastio</artifactId>
+            <version>v0.1.0</version>
+        </dependency>
+
         <!-- FastKeyboard - RawInput Engine -->
         <dependency>
             <groupId>com.github.andrestubbe</groupId>
             <artifactId>FastKeyboard</artifactId>
-            <version>0.2.0</version>
+            <version>v0.2.0</version>
         </dependency>
 
         <!-- FastCore - Native Loader (transitive from Keyboard, but good to have) -->
         <dependency>
             <groupId>com.github.andrestubbe</groupId>
             <artifactId>fastcore</artifactId>
-            <version>0.1.0</version>
+            <version>v0.1.0</version>
         </dependency>
 
         <dependency>
@@ -60,29 +74,16 @@
             
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.6.0</version>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
                 <configuration>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                    <appendAssemblyId>false</appendAssemblyId>
-                    <finalName>${project.artifactId}-${project.version}</finalName>
                     <archive>
                         <manifest>
+                            <addClasspath>true</addClasspath>
                             <mainClass>fastkeylogger.Demo</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

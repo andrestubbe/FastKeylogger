@@ -1,4 +1,4 @@
-# FastKeylogger v0.1.0 — Behavioral Typing Logic for Java
+# FastKeylogger — Behavioral Typing Logic for Java v0.1.0
 
 **Behavioral typing sensor and rhythm analysis layer for the FastJava ecosystem.**
 

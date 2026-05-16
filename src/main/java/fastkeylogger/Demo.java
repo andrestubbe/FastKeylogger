@@ -1,38 +1,44 @@
 package fastkeylogger;
 
-/**
- * Demo for FastKeylogger showcasing behavioral stream capture.
- */
+import java.util.Scanner;
+
 public class Demo {
     public static void main(String[] args) {
-        System.out.println("⚡ FastKeylogger v0.1.0 — Behavioral Typing Sensor");
-        System.out.println("Status: LISTENING (System-wide)");
-        System.out.println("Note: This demo shows text reconstruction and dwell-time metrics.");
-        System.out.println("--------------------------------------------------");
-
+        System.out.println("=== FastKeylogger Behavioral Demo v0.1.0 ===");
+        
         FastKeylogger logger = new FastKeylogger();
         TextReconstructor reconstructor = new TextReconstructor();
+        SessionStorage storage = new SessionStorage();
         
+        System.out.println("Log File: " + storage.getLogFilePath());
+        System.out.println("Instruction: Start typing anywhere. Press ENTER in this console to stop.");
+        System.out.println("--------------------------------------------------");
+
         logger.addListener(event -> {
+            // 1. Reconstruct text
             reconstructor.process(event);
             
-            // Clear line and redraw status
-            System.out.print("\r");
-            String text = reconstructor.getText();
-            if (text.length() > 50) text = "..." + text.substring(text.length() - 47);
+            // 2. Save to native storage
+            storage.saveEvent(event);
             
-            String metrics = String.format(" [Dwell: %3dms] [Correction: %b]", 
-                event.durationMs(), event.isCorrection());
-            
-            System.out.print("TEXT: " + String.format("%-50s", text) + metrics);
+            // 3. Live Feedback
+            String charDisplay = event.isCorrection() ? "[BACK]" : "'" + event.character() + "'";
+            System.out.printf("[%d ms] Typed %-6s | Dwell: %3d ms | Buffer: [%s]\n", 
+                event.timestamp() % 100000, 
+                charDisplay, 
+                event.durationMs(), 
+                reconstructor.getText()
+            );
         });
 
         logger.start();
 
-        try {
-            Thread.currentThread().join();
-        } catch (InterruptedException e) {
-            logger.stop();
-        }
+        // Keep alive until user presses ENTER
+        new Scanner(System.in).nextLine();
+
+        logger.stop();
+        System.out.println("--------------------------------------------------");
+        System.out.println("Demo stopped. Final Text: " + reconstructor.getText());
+        System.out.println("Events saved to: " + storage.getLogFilePath());
     }
 }
