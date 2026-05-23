@@ -49,10 +49,10 @@ public class Demo {
 
 ## Installation
 
-FastKeylogger requires **three** JARs in your environment: the module itself, `FastKeyboard` (the driver), and `FastCore` (the native loader).
+### Option 1: Maven (Recommended)
+Add the JitPack repository and the dependencies to your `pom.xml`:
 
-### Maven (JitPack)
-```xml
+`xml
 <repositories>
     <repository>
         <id>jitpack.io</id>
@@ -61,50 +61,42 @@ FastKeylogger requires **three** JARs in your environment: the module itself, `F
 </repositories>
 
 <dependencies>
-    <!-- 1. The Keylogger Logic -->
+    <!-- FastKeylogger Library -->
     <dependency>
         <groupId>com.github.andrestubbe</groupId>
-        <artifactId>FastKeylogger</artifactId>
-        <version>0.1.0</version>
+        <artifactId>fastkeylogger</artifactId>
+        <version>v0.1.0</version>
     </dependency>
-    
-    <!-- 2. The Keyboard Driver -->
-    <dependency>
-        <groupId>com.github.andrestubbe</groupId>
-        <artifactId>FastKeyboard</artifactId>
-        <version>0.2.0</version>
-    </dependency>
-
-    <!-- 3. The Native Loader -->
+    <!-- FastCore (Required Native Loader) -->
     <dependency>
         <groupId>com.github.andrestubbe</groupId>
         <artifactId>fastcore</artifactId>
-        <version>0.1.0</version>
+        <version>v0.1.0</version>
     </dependency>
 </dependencies>
-```
+`
 
-### Gradle (JitPack)
-```groovy
+### Option 2: Gradle (via JitPack)
+`groovy
 repositories {
     maven { url 'https://jitpack.io' }
 }
 
 dependencies {
-    implementation 'com.github.andrestubbe:FastKeylogger:0.1.0'
-    implementation 'com.github.andrestubbe:FastKeyboard:0.2.0'
-    implementation 'com.github.andrestubbe:fastcore:0.1.0'
+    implementation 'com.github.andrestubbe:.1.0'
+    implementation 'com.github.andrestubbe:fastcore:v0.1.0'
 }
-```
+`
 
 ### Option 3: Direct Download (No Build Tool)
 Download the latest JARs directly to add them to your classpath:
 
-1. 📦 [**fastkeylogger-v0.1.0.jar**](https://github.com/andrestubbe/FastKeylogger/releases/download/v0.1.0/fastkeylogger-0.1.0.jar)
-2. 📦 [**fastkeyboard-v0.2.0.jar**](https://github.com/andrestubbe/FastKeyboard/releases/download/v0.2.0/FastKeyboard-0.2.0.jar)
-3. ⚙️ [**fastcore-v0.1.0.jar**](https://github.com/andrestubbe/fastcore/releases/download/v0.1.0/fastcore-0.1.0.jar)
+1. 📦 **[fastkeylogger-v0.1.0.jar](https://github.com/andrestubbe/FastKeylogger/releases/download/v0.1.0/fastkeylogger-v0.1.0.jar)** (The Core Library)
+2. ⚙️ **[fastcore-v0.1.0.jar](https://github.com/andrestubbe/FastCore/releases/download/v0.1.0/fastcore-v0.1.0.jar)** (The Mandatory Native Loader)
 
----
+> [!IMPORTANT]
+> All JARs must be in your classpath for the native JNI calls to function correctly.
+
 
 ## API Reference
 
