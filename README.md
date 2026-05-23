@@ -1,5 +1,4 @@
-# FastKeylogger — Behavioral Typing Logic for Java v0.1.0
-
+# FastKeylogger — Behavioral Typing Logic for Java v0.1.0 [ALPHA] - v0.1.0
 **Behavioral typing sensor and rhythm analysis layer for the FastJava ecosystem.**
 
 [![Build](https://img.shields.io/github/actions/workflow/status/andrestubbe/FastKeylogger/maven.yml?branch=main)](https://github.com/andrestubbe/FastKeylogger/actions)
@@ -138,3 +137,4 @@ MIT License — See [LICENSE](LICENSE) file for details.
 
 ---
 **Made with ⚡ by Andre Stubbe**
+
