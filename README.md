@@ -1,12 +1,6 @@
 ﻿# FastKeylogger — Behavioral Typing Logic for Java v0.1.0 [ALPHA] - v0.1.0
 **Behavioral typing sensor and rhythm analysis layer for the FastJava ecosystem.**
 
-[![Build](https://img.shields.io/github/actions/workflow/status/andrestubbe/FastKeylogger/maven.yml?branch=main)](https://github.com/andrestubbe/FastKeylogger/actions)
-[![Java](https://img.shields.io/badge/Java-17+-blue.svg)](https://www.java.com)
-[![Platform](https://img.shields.io/badge/Platform-Windows-lightgrey.svg)]()
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![JitPack](https://jitpack.io/v/andrestubbe/FastKeylogger.svg)](https://jitpack.io/#andrestubbe/FastKeylogger)
-
 FastKeylogger transforms raw hardware events into high-level **behavioral typing signatures**. While standard loggers only capture characters, FastKeylogger captures the **biological rhythm** (dwell times, flight times) and cognitive patterns (correction behavior) of the user.
 
 ```java
@@ -25,6 +19,12 @@ public class Demo {
     }
 }
 ```
+
+[![Status](https://img.shields.io/badge/status-v0.1.0-brightgreen.svg)](https://github.com/andrestubbe/FastKeylogger/releases/tag/v0.1.0)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Java](https://img.shields.io/badge/Java-17+-blue.svg)](https://www.java.com)
+[![Platform](https://img.shields.io/badge/Platform-Windows%2010+-lightgrey.svg)]()
+[![JitPack](https://img.shields.io/badge/JitPack-ready-green.svg)](https://jitpack.io/#andrestubbe)
 
 ---
 
