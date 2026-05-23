@@ -1,4 +1,4 @@
-﻿# FastKeylogger â€” Behavioral Typing Logic for Java v0.1.0 [ALPHA] - v0.1.0
+﻿# FastKeylogger — Behavioral Typing Logic for Java v0.1.0 [ALPHA] - v0.1.0
 **Behavioral typing sensor and rhythm analysis layer for the FastJava ecosystem.**
 
 [![Build](https://img.shields.io/github/actions/workflow/status/andrestubbe/FastKeylogger/maven.yml?branch=main)](https://github.com/andrestubbe/FastKeylogger/actions)
@@ -10,7 +10,7 @@
 FastKeylogger transforms raw hardware events into high-level **behavioral typing signatures**. While standard loggers only capture characters, FastKeylogger captures the **biological rhythm** (dwell times, flight times) and cognitive patterns (correction behavior) of the user.
 
 ```java
-// Quick Start â€” Example
+// Quick Start — Example
 import fastkeylogger.FastKeylogger;
 
 public class Demo {
@@ -40,10 +40,10 @@ public class Demo {
 
 ## Key Features
 
-- **ðŸš€ Text Reconstruction** â€” Converts raw hardware scancodes into a logical character stream.
-- **â±ï¸ Timing Signatures** â€” Captures precise **Dwell Time** (hold duration) and **Flight Time** (latency).
-- **ðŸ§¹ Correction Awareness** â€” Monitors backspaces and deletions to analyze cognitive load and error patterns.
-- **âš¡ Zero Polling** â€” Purely event-driven logic based on `FastKeyboard`.
+- **🚀 Text Reconstruction** — Converts raw hardware scancodes into a logical character stream.
+- **⏱️ Timing Signatures** — Captures precise **Dwell Time** (hold duration) and **Flight Time** (latency).
+- **🧹 Correction Awareness** — Monitors backspaces and deletions to analyze cognitive load and error patterns.
+- **⚡ Zero Polling** — Purely event-driven logic based on `FastKeyboard`.
 
 ---
 
@@ -113,21 +113,21 @@ Download the latest JARs directly to add them to your classpath:
 
 | Platform | Status |
 |----------|--------|
-| Windows 10/11 (x64) | âœ… Fully Supported |
-| Linux | ðŸš§ Dependent on FastKeyboard |
-| macOS | ðŸš§ Dependent on FastKeyboard |
+| Windows 10/11 (x64) | ✅ Fully Supported |
+| Linux | 🚧 Dependent on FastKeyboard |
+| macOS | 🚧 Dependent on FastKeyboard |
 
 ---
 
 ## License
-MIT License â€” See [LICENSE](LICENSE) file for details.
+MIT License — See [LICENSE](LICENSE) file for details.
 
 ---
 
 ## Related Projects
-- [FastKeyboard](https://github.com/andrestubbe/FastKeyboard) â€” Windows RawInput Driver
-- [FastCore](https://github.com/andrestubbe/FastCore) â€” Native Library Loader
+- [FastKeyboard](https://github.com/andrestubbe/FastKeyboard) — Windows RawInput Driver
+- [FastCore](https://github.com/andrestubbe/FastCore) — Native Library Loader
 
 ---
-**Made with âš¡ by Andre Stubbe**
+**Made with ⚡ by Andre Stubbe**
 
