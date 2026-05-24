@@ -1,7 +1,19 @@
-﻿# FastKeylogger — Behavioral Typing Logic for Java v0.1.0 [ALPHA] - v0.1.0
-**Behavioral typing sensor and rhythm analysis layer for the FastJava ecosystem.**
+﻿# FastKeylogger v0.1.0 [ALPHA] — Behavioral Typing Logic for Java
+
+[![Status](https://img.shields.io/badge/status-v0.1.0-brightgreen.svg)](https://github.com/andrestubbe/FastKeylogger/releases/tag/v0.1.0)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Java](https://img.shields.io/badge/Java-17+-blue.svg)](https://www.java.com)
+[![Platform](https://img.shields.io/badge/Platform-Windows%2010+-lightgrey.svg)]()
+[![JitPack](https://img.shields.io/badge/JitPack-ready-green.svg)](https://jitpack.io/#andrestubbe)
+
+**⚡ Behavioral typing sensor and rhythm analysis layer for the FastJava ecosystem.**
 
 FastKeylogger transforms raw hardware events into high-level **behavioral typing signatures**. While standard loggers only capture characters, FastKeylogger captures the **biological rhythm** (dwell times, flight times) and cognitive patterns (correction behavior) of the user.
+
+
+[![FastKeyboard Showcase](docs/screenshot.png)](https://www.youtube.com/watch?v=BZsqQl7WqWk)
+
+
 
 ```java
 // Quick Start — Example
@@ -19,12 +31,6 @@ public class Demo {
     }
 }
 ```
-
-[![Status](https://img.shields.io/badge/status-v0.1.0-brightgreen.svg)](https://github.com/andrestubbe/FastKeylogger/releases/tag/v0.1.0)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Java](https://img.shields.io/badge/Java-17+-blue.svg)](https://www.java.com)
-[![Platform](https://img.shields.io/badge/Platform-Windows%2010+-lightgrey.svg)]()
-[![JitPack](https://img.shields.io/badge/JitPack-ready-green.svg)](https://jitpack.io/#andrestubbe)
 
 ---
 
@@ -125,9 +131,13 @@ MIT License — See [LICENSE](LICENSE) file for details.
 ---
 
 ## Related Projects
-- [FastKeyboard](https://github.com/andrestubbe/FastKeyboard) — Windows RawInput Driver
-- [FastCore](https://github.com/andrestubbe/FastCore) — Native Library Loader
+- [FastCore](https://github.com/andrestubbe/FastCore) — Native Library Loader for Java
+- [FastKeyboard](https://github.com/andrestubbe/FastKeyboard) — High-performance RawInput engine
+- [FastTheme](https://github.com/andrestubbe/FastTheme) — Advanced UI styling engine
 
 ---
-**Made with ⚡ by Andre Stubbe**
+**Part of the FastJava Ecosystem** — *Making the JVM faster.*
+
+
+
 
