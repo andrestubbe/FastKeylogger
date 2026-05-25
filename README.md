@@ -6,11 +6,15 @@
 [![Platform](https://img.shields.io/badge/Platform-Windows%2010+-lightgrey.svg)]()
 [![JitPack](https://img.shields.io/badge/JitPack-ready-green.svg)](https://jitpack.io/#andrestubbe)
 
+---
+
 **⚡ Behavioral typing sensor and rhythm analysis layer for the FastJava ecosystem.**
 
 FastKeylogger transforms raw hardware events into high-level **behavioral typing signatures**. While standard loggers
 only capture characters, FastKeylogger captures the **biological rhythm** (dwell times, flight times) and cognitive
 patterns (correction behavior) of the user.
+
+---
 
 [![FastKeyboard Showcase](docs/screenshot.png)](https://www.youtube.com/watch?v=BZsqQl7WqWk)
 
