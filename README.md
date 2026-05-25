@@ -124,11 +124,11 @@ Download the latest JARs directly to add them to your classpath:
 
 ## Platform Support
 
-| Platform            | Status                       |
-|---------------------|------------------------------|
-| Windows 10/11 (x64) | ✅ Fully Supported            |
-| Linux               | 🚧 Dependent on FastKeyboard |
-| macOS               | 🚧 Dependent on FastKeyboard |
+| Platform            | Status            |
+|---------------------|-------------------|
+| Windows 10/11 (x64) | ✅ Fully Supported |
+| Linux               | 🚧 Planned        |
+| macOS               | 🚧 Planned        |
 
 ---
 
@@ -139,6 +139,7 @@ MIT License — See [LICENSE](LICENSE) file for details.
 ---
 
 ## Related Projects
+
 - [FastCore](https://github.com/andrestubbe/FastCore) — Native Library Loader & JNI Utilities for Java
 - [FastMouse](https://github.com/andrestubbe/FastMouse) — High-Performance Native Mouse API for Java
 - [FastHotkey](https://github.com/andrestubbe/FastHotkey) — Low-Latency Global Hotkey API for Java
