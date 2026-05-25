@@ -8,39 +8,40 @@
 
 **⚡ Behavioral typing sensor and rhythm analysis layer for the FastJava ecosystem.**
 
-FastKeylogger transforms raw hardware events into high-level **behavioral typing signatures**. While standard loggers only capture characters, FastKeylogger captures the **biological rhythm** (dwell times, flight times) and cognitive patterns (correction behavior) of the user.
-
+FastKeylogger transforms raw hardware events into high-level **behavioral typing signatures**. While standard loggers
+only capture characters, FastKeylogger captures the **biological rhythm** (dwell times, flight times) and cognitive
+patterns (correction behavior) of the user.
 
 [![FastKeyboard Showcase](docs/screenshot.png)](https://www.youtube.com/watch?v=BZsqQl7WqWk)
-
-
-
-```java
-// Quick Start — Example
-import fastkeylogger.FastKeylogger;
-
-public class Demo {
-    public static void main(String[] args) {
-        FastKeylogger logger = new FastKeylogger();
-        
-        logger.addListener(event -> {
-            System.out.println("Typed: " + event.character() + " (Hold: " + event.durationMs() + "ms)");
-        });
-        
-        logger.start();
-    }
-}
-```
 
 ---
 
 ## Table of Contents
+
 - [Key Features](#key-features)
 - [Installation](#installation)
 - [API Reference](#api-reference)
 - [Platform Support](#platform-support)
 - [License](#license)
 - [Related Projects](#related-projects)
+
+---
+
+```java
+import fastkeylogger.FastKeylogger;
+
+public class Example {
+    public static void main(String[] args) {
+        FastKeylogger logger = new FastKeylogger();
+
+        logger.addListener(event -> {
+            System.out.println("Typed: " + event.character() + " (Hold: " + event.durationMs() + "ms)");
+        });
+
+        logger.start();
+    }
+}
+```
 
 ---
 
@@ -56,9 +57,11 @@ public class Demo {
 ## Installation
 
 ### Option 1: Maven (Recommended)
+
 Add the JitPack repository and the dependencies to your `pom.xml`:
 
 ```xml
+
 <repositories>
     <repository>
         <id>jitpack.io</id>
@@ -67,23 +70,24 @@ Add the JitPack repository and the dependencies to your `pom.xml`:
 </repositories>
 
 <dependencies>
-    <!-- FastKeylogger Library -->
-    <dependency>
-        <groupId>com.github.andrestubbe</groupId>
-        <artifactId>fastkeylogger</artifactId>
-        <version>v0.1.0</version>
-    </dependency>
+<!-- FastKeylogger Library -->
+<dependency>
+    <groupId>com.github.andrestubbe</groupId>
+    <artifactId>fastkeylogger</artifactId>
+    <version>v0.1.0</version>
+</dependency>
 
-    <!-- FastCore (Required Native Loader) -->
-    <dependency>
-        <groupId>com.github.andrestubbe</groupId>
-        <artifactId>fastcore</artifactId>
-        <version>v0.1.0</version>
-    </dependency>
+<!-- FastCore (Required Native Loader) -->
+<dependency>
+    <groupId>com.github.andrestubbe</groupId>
+    <artifactId>fastcore</artifactId>
+    <version>v0.1.0</version>
+</dependency>
 </dependencies>
 ```
 
 ### Option 2: Gradle (via JitPack)
+
 ```groovy
 repositories {
     maven { url 'https://jitpack.io' }
@@ -96,41 +100,46 @@ dependencies {
 ```
 
 ### Option 3: Direct Download (No Build Tool)
+
 Download the latest JARs directly to add them to your classpath:
 
-1. 📦 **[fastkeylogger-v0.1.0.jar](https://github.com/andrestubbe/FastKeylogger/releases/download/v0.1.0/fastkeylogger-v0.1.0.jar)** (The Core Library)
-2. ⚙️ **[fastcore-v0.1.0.jar](https://github.com/andrestubbe/FastCore/releases/download/v0.1.0/fastcore-v0.1.0.jar)** (The Mandatory Native Loader)
+1. 📦 *
+   *[fastkeylogger-v0.1.0.jar](https://github.com/andrestubbe/FastKeylogger/releases/download/v0.1.0/fastkeylogger-v0.1.0.jar)
+   ** (The Core Library)
+2. ⚙️ **[fastcore-v0.1.0.jar](https://github.com/andrestubbe/FastCore/releases/download/v0.1.0/fastcore-v0.1.0.jar)** (
+   The Mandatory Native Loader)
 
 > [!IMPORTANT]
 > All JARs must be in your classpath for the native JNI calls to function correctly.
 
-
 ## API Reference
 
-| Method | Description |
-|--------|-------------|
-| `void start()` | Starts the underlying keyboard listener. |
-| `void stop()` | Stops the listener and releases resources. |
+| Method                             | Description                                    |
+|------------------------------------|------------------------------------------------|
+| `void start()`                     | Starts the underlying keyboard listener.       |
+| `void stop()`                      | Stops the listener and releases resources.     |
 | `void addListener(TypingListener)` | Registers a new observer for processed events. |
 
 ---
 
 ## Platform Support
 
-| Platform | Status |
-|----------|--------|
-| Windows 10/11 (x64) | ✅ Fully Supported |
-| Linux | 🚧 Dependent on FastKeyboard |
-| macOS | 🚧 Dependent on FastKeyboard |
+| Platform            | Status                       |
+|---------------------|------------------------------|
+| Windows 10/11 (x64) | ✅ Fully Supported            |
+| Linux               | 🚧 Dependent on FastKeyboard |
+| macOS               | 🚧 Dependent on FastKeyboard |
 
 ---
 
 ## License
+
 MIT License — See [LICENSE](LICENSE) file for details.
 
 ---
 
 ## Related Projects
+
 - [FastCore](https://github.com/andrestubbe/FastCore) — Native Library Loader for Java
 - [FastKeyboard](https://github.com/andrestubbe/FastKeyboard) — High-performance RawInput engine
 - [FastTheme](https://github.com/andrestubbe/FastTheme) — Advanced UI styling engine
