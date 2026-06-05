@@ -7,7 +7,7 @@
 
     <groupId>com.github.andrestubbe</groupId>
             <artifactId>FastKeylogger</artifactId>
-    <version>v0.1.0</version>
+    <version>0.1.0</version>
     <packaging>jar</packaging>
 
     <name>FastKeylogger</name>
@@ -32,28 +32,28 @@
         <dependency>
             <groupId>com.github.andrestubbe</groupId>
             <artifactId>FastJSON</artifactId>
-            <version>v0.1.0</version>
+            <version>0.1.0</version>
         </dependency>
 
         <!-- FastIO - Ultra-fast native file I/O -->
         <dependency>
             <groupId>com.github.andrestubbe</groupId>
             <artifactId>FastIO</artifactId>
-            <version>v0.1.0</version>
+            <version>0.1.0</version>
         </dependency>
 
         <!-- FastKeyboard - RawInput Engine -->
         <dependency>
             <groupId>com.github.andrestubbe</groupId>
             <artifactId>FastKeyboard</artifactId>
-            <version>v0.1.0</version>
+            <version>0.1.0</version>
         </dependency>
 
         <!-- FastCore - Native Loader (transitive from Keyboard, but good to have) -->
         <dependency>
             <groupId>com.github.andrestubbe</groupId>
             <artifactId>FastCore</artifactId>
-            <version>v0.1.0</version>
+            <version>0.1.0</version>
         </dependency>
 
         <dependency>
