@@ -1,6 +1,6 @@
 package fastkeylogger;
 
-import fastio.FastIO;
+import io.github.andrestubbe.fastio.FastIO;
 import fastjson.FastJSON;
 import java.io.File;
 import java.time.LocalDateTime;
