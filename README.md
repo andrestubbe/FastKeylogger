@@ -1,4 +1,4 @@
-# FastKeylogger 0.1.0 [ALPHA-2026-06] — Behavioral Typing Logic for Java
+# FastKeylogger 0.1.0 [ALPHA-2026-06] â€” ï¿½ Behavioral Typing Logic for Java
 
 [![Status](https://img.shields.io/badge/status-0.1.0-brightgreen.svg)](https://github.com/andrestubbe/FastKeylogger/releases/tag/0.1.0)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -51,10 +51,10 @@ public class Example {
 
 ## Key Features
 
-- **?? Text Reconstruction** — Converts raw hardware scancodes into a logical character stream.
-- **?? Timing Signatures** — Captures precise **Dwell Time** (hold duration) and **Flight Time** (latency).
-- **?? Correction Awareness** — Monitors backspaces and deletions to analyze cognitive load and error patterns.
-- **? Zero Polling** — Purely event-driven logic based on `FastKeylogger`.
+- **?? Text Reconstruction** ï¿½ Converts raw hardware scancodes into a logical character stream.
+- **?? Timing Signatures** ï¿½ Captures precise **Dwell Time** (hold duration) and **Flight Time** (latency).
+- **?? Correction Awareness** ï¿½ Monitors backspaces and deletions to analyze cognitive load and error patterns.
+- **? Zero Polling** ï¿½ Purely event-driven logic based on `FastKeylogger`.
 
 ---
 
@@ -138,21 +138,21 @@ Download the latest JARs directly to add them to your classpath:
 
 ## License
 
-MIT License — See [LICENSE](LICENSE) file for details.
+MIT License ï¿½ See [LICENSE](LICENSE) file for details.
 
 ---
 
 ## Related Projects
 
-- [FastCore](https://github.com/andrestubbe/FastCore) — Native Library Loader & JNI Utilities for Java
-- [FastMouse](https://github.com/andrestubbe/FastMouse) — High-Performance Native Mouse API for Java
-- [FastHotkey](https://github.com/andrestubbe/FastHotkey) — Low-Latency Global Hotkey API for Java
-- [FastKeylogger](https://github.com/andrestubbe/FastKeylogger) — Native Windows RawInput API for Java
-- [FastTouch](https://github.com/andrestubbe/FastTouch) — Native touchscreen input for Java
-- [FastStylus](https://github.com/andrestubbe/FastStylus) — Native Stylus/Pen Input for Java
+- [FastCore](https://github.com/andrestubbe/FastCore) ï¿½ Native Library Loader & JNI Utilities for Java
+- [FastMouse](https://github.com/andrestubbe/FastMouse) ï¿½ High-Performance Native Mouse API for Java
+- [FastHotkey](https://github.com/andrestubbe/FastHotkey) ï¿½ Low-Latency Global Hotkey API for Java
+- [FastKeylogger](https://github.com/andrestubbe/FastKeylogger) ï¿½ Native Windows RawInput API for Java
+- [FastTouch](https://github.com/andrestubbe/FastTouch) ï¿½ Native touchscreen input for Java
+- [FastStylus](https://github.com/andrestubbe/FastStylus) ï¿½ Native Stylus/Pen Input for Java
 
 ---
-**Part of the FastJava Ecosystem** — *Making the JVM faster.*
+**Part of the FastJava Ecosystem** ï¿½ *Making the JVM faster.*
 
 
 
