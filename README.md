@@ -1,4 +1,4 @@
-﻿# FastKeylogger 0.1.0 [ALPHA] — Behavioral Typing Logic for Java
+# FastKeylogger 0.1.0 [ALPHA-2026-06] � Behavioral Typing Logic for Java
 
 [![Status](https://img.shields.io/badge/status-0.1.0-brightgreen.svg)](https://github.com/andrestubbe/FastKeylogger/releases/tag/0.1.0)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -8,7 +8,7 @@
 
 ---
 
-**⚡ Behavioral typing sensor and rhythm analysis layer for the FastJava ecosystem.**
+**? Behavioral typing sensor and rhythm analysis layer for the FastJava ecosystem.**
 
 FastKeylogger transforms raw hardware events into high-level **behavioral typing signatures**. While standard loggers
 only capture characters, FastKeylogger captures the **biological rhythm** (dwell times, flight times) and cognitive
@@ -51,10 +51,10 @@ public class Example {
 
 ## Key Features
 
-- **🚀 Text Reconstruction** — Converts raw hardware scancodes into a logical character stream.
-- **⏱️ Timing Signatures** — Captures precise **Dwell Time** (hold duration) and **Flight Time** (latency).
-- **🧹 Correction Awareness** — Monitors backspaces and deletions to analyze cognitive load and error patterns.
-- **⚡ Zero Polling** — Purely event-driven logic based on `FastKeylogger`.
+- **?? Text Reconstruction** � Converts raw hardware scancodes into a logical character stream.
+- **?? Timing Signatures** � Captures precise **Dwell Time** (hold duration) and **Flight Time** (latency).
+- **?? Correction Awareness** � Monitors backspaces and deletions to analyze cognitive load and error patterns.
+- **? Zero Polling** � Purely event-driven logic based on `FastKeylogger`.
 
 ---
 
@@ -107,10 +107,10 @@ dependencies {
 
 Download the latest JARs directly to add them to your classpath:
 
-1. 📦 *
+1. ?? *
    *[fastkeylogger-0.1.0.jar](https://github.com/andrestubbe/FastKeylogger/releases/download/0.1.0/fastkeylogger-0.1.0.jar)
    ** (The Core Library)
-2. ⚙️ **[fastcore-0.1.0.jar](https://github.com/andrestubbe/FastCore/releases/download/0.1.0/fastcore-0.1.0.jar)** (
+2. ?? **[fastcore-0.1.0.jar](https://github.com/andrestubbe/FastCore/releases/download/0.1.0/fastcore-0.1.0.jar)** (
    The Mandatory Native Loader)
 
 > [!IMPORTANT]
@@ -130,29 +130,29 @@ Download the latest JARs directly to add them to your classpath:
 
 | Platform            | Status            |
 |---------------------|-------------------|
-| Windows 10/11 (x64) | ✅ Fully Supported |
-| Linux               | 🚧 Planned        |
-| macOS               | 🚧 Planned        |
+| Windows 10/11 (x64) | ? Fully Supported |
+| Linux               | ?? Planned        |
+| macOS               | ?? Planned        |
 
 ---
 
 ## License
 
-MIT License — See [LICENSE](LICENSE) file for details.
+MIT License � See [LICENSE](LICENSE) file for details.
 
 ---
 
 ## Related Projects
 
-- [FastCore](https://github.com/andrestubbe/FastCore) — Native Library Loader & JNI Utilities for Java
-- [FastMouse](https://github.com/andrestubbe/FastMouse) — High-Performance Native Mouse API for Java
-- [FastHotkey](https://github.com/andrestubbe/FastHotkey) — Low-Latency Global Hotkey API for Java
-- [FastKeylogger](https://github.com/andrestubbe/FastKeylogger) — Native Windows RawInput API for Java
-- [FastTouch](https://github.com/andrestubbe/FastTouch) — Native touchscreen input for Java
-- [FastStylus](https://github.com/andrestubbe/FastStylus) — Native Stylus/Pen Input for Java
+- [FastCore](https://github.com/andrestubbe/FastCore) � Native Library Loader & JNI Utilities for Java
+- [FastMouse](https://github.com/andrestubbe/FastMouse) � High-Performance Native Mouse API for Java
+- [FastHotkey](https://github.com/andrestubbe/FastHotkey) � Low-Latency Global Hotkey API for Java
+- [FastKeylogger](https://github.com/andrestubbe/FastKeylogger) � Native Windows RawInput API for Java
+- [FastTouch](https://github.com/andrestubbe/FastTouch) � Native touchscreen input for Java
+- [FastStylus](https://github.com/andrestubbe/FastStylus) � Native Stylus/Pen Input for Java
 
 ---
-**Part of the FastJava Ecosystem** — *Making the JVM faster.*
+**Part of the FastJava Ecosystem** � *Making the JVM faster.*
 
 
 
