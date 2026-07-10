@@ -1,8 +1,11 @@
 package fastkeylogger;
 
-import io.github.andrestubbe.fastio.FastIO;
 import fastjson.FastJSON;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -37,8 +40,9 @@ public class SessionStorage {
         lineWithNewline[jsonBytes.length] = '\n';
         
         try {
-            FastIO.appendBytes(filePath, lineWithNewline);
-        } catch (java.io.IOException e) {
+            Files.write(Path.of(filePath), lineWithNewline,
+                StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+        } catch (IOException e) {
             System.err.println("FastKeylogger: Failed to save event to " + filePath);
             e.printStackTrace();
         }
