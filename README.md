@@ -16,18 +16,6 @@ patterns (correction behavior) of the user.
 
 ---
 
-## Table of Contents
-
-- [Key Features](#key-features)
-- [Installation](#installation)
-- [Quick Start](#quick-start)
-- [API Reference](#api-reference)
-- [Platform Support](#platform-support)
-- [License](#license)
-- [Related Projects](#related-projects)
-
----
-
 ## Quick Start
 
 ```java
@@ -47,6 +35,21 @@ public class Example {
 ```
 
 ---
+
+---
+
+## Table of Contents
+
+- [Key Features](#key-features)
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [API Reference](#api-reference)
+- [Platform Support](#platform-support)
+- [License](#license)
+- [Related Projects](#related-projects)
+
+---
+
 
 ## Key Features
 
