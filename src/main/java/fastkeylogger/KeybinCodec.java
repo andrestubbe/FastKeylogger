@@ -102,7 +102,7 @@ public final class KeybinCodec {
             currentTimestamp += delta;
 
             long durationMs = reader.readVarLong();
-            char c = reader.readChar();
+            char c = (char) reader.readVarInt();
             boolean isCorrection = reader.readByte() == 1;
             int vKey = reader.readVarInt();
             int scanCode = reader.readVarInt();

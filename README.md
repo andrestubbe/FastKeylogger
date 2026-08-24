@@ -1,4 +1,4 @@
-# FastKeylogger 0.1.0 [ALPHA-2026-06-14] — Behavioral Typing Logic for Java
+# FastKeylogger 0.1.0 [ALPHA] — Native Raw Keystroke Logger, Typing Biometrics & Stream Compression
 
 [![Status](https://img.shields.io/badge/status-0.1.0-brightgreen.svg)](https://github.com/andrestubbe/FastKeylogger/releases/tag/0.1.0)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -6,65 +6,98 @@
 [![Platform](https://img.shields.io/badge/Platform-Windows%2010+-lightgrey.svg)]()
 [![JitPack](https://img.shields.io/badge/JitPack-ready-green.svg)](https://jitpack.io/#andrestubbe/FastKeylogger)
 
-**🧠 Behavioral typing sensor and rhythm analysis layer for the FastJava ecosystem.**
+---
 
-FastKeylogger transforms raw hardware events into high-level **behavioral typing signatures**. While standard loggers
-only capture characters, FastKeylogger captures the **biological rhythm** (dwell times, flight times) and cognitive
-patterns (correction behavior) of the user.
+**⚡ High-performance raw keystroke logger, biometric typing cadence telemetry, and `.keybin` dual-format streaming engine for Java.**
 
-[![FastKeylogger Showcase](docs/screenshot.png)](https://www.youtube.com/watch?v=BZsqQl7WqWk)
+**FastKeylogger** intercepts raw Windows keyboard events directly via **[FastKeyboard](https://github.com/andrestubbe/FastKeyboard)**, extracts high-resolution behavioral dwell/flight-time dynamics and keystroke corrections, and compresses streams in real-time into binary `.keybin` logs via **[FastFileFormat](https://github.com/andrestubbe/FastFileFormat)** & **[FastBinary](https://github.com/andrestubbe/FastBinary)**.
 
 ---
 
 ## Quick Start
 
 ```java
-import fastkeylogger.FastKeylogger;
+import fastkeylogger.*;
+import java.nio.file.Path;
 
-public class Example {
-    public static void main(String[] args) {
-        FastKeylogger logger = new FastKeylogger();
+public class Demo {
+    public static void main(String[] args) throws Exception {
+        Path logDir = Path.of("logs/keyboard");
 
-        logger.addListener(event -> {
-            System.out.println("Typed: " + event.character() + " (Hold: " + event.durationMs() + "ms)");
-        });
+        // 1. Initialize background raw keylogger
+        try (FastKeylogger logger = new FastKeylogger(logDir, 5000)) {
+            logger.addListener(event -> {
+                System.out.printf("Key '%c' [VK=0x%02X] dwell=%dms\n",
+                        event.character(), event.virtualKeyCode(), event.durationMs());
+            });
 
-        logger.start();
+            logger.start();
+            Thread.sleep(5000);
+            logger.stop(); // Flushes automatically to .keybin
+        }
     }
 }
 ```
 
 ---
 
----
-
-## Table of Contents
-
-- [Key Features](#key-features)
-- [Installation](#installation)
-- [Quick Start](#quick-start)
-- [API Reference](#api-reference)
-- [Platform Support](#platform-support)
-- [License](#license)
-- [Related Projects](#related-projects)
-
----
-
-
 ## Key Features
 
-- 📝 **Text Reconstruction** — Converts raw hardware scancodes into a logical character stream.
-- ⏱️ **Timing Signatures** — Captures precise **Dwell Time** (hold duration) and **Flight Time** (inter-key latency).
-- 🧠 **Correction Awareness** — Monitors backspaces and deletions to analyze cognitive load and error patterns.
-- 🎯 **Zero Polling** — Purely event-driven logic based on `FastKeyboard` raw input callbacks.
+- **⌨️ Win32 Raw Input Interception** — Sub-millisecond keystroke telemetry capturing raw scan codes and virtual keys via `FastKeyboard`.
+- **⏱️ Biometric Cadence Dynamics** — Precise dwell-time (key press duration) and flight-time (inter-key intervals) measurement.
+- **⚡ FastFileFormat `.keybin` Compression** — Delta-timestamped VarInt event serialization (Payload ID `0x0004`).
+- **🔤 Real-Time Text Reconstruction** — Backspace-aware text accumulator and state tracker (`TextReconstructor`).
+- **📦 Zero Heavy Dependencies** — Native-speed pure Java 17+ core backed by `FastCore`, `FastBinary`, and `FastFileFormat`.
+
+---
+
+## Real-World Scenarios
+
+- **🛡️ Continuous Biometric Authentication** — Verifying user identity via unique keystroke rhythm patterns and behavioral cadence.
+- **🤖 AI Agent Telemetry & Imitation** — Capturing fine-grained typing cadences, hesitation pauses, and self-corrections for autonomous agents.
+- **📊 Ergonomics & Speed Analytics** — Profiling real-world WPM, error rates, and burst typing velocities.
+- **📑 Audit & Recovery Logging** — Crash-resilient background typing preservation with microsecond precision.
+
+---
+
+## Performance Benchmarks
+
+FastKeylogger is profiled using **JMH** to guarantee maximum stream throughput and zero dropped input packets.
+
+| Benchmark Operation | Score (ops/ms) | Event Throughput | Memory Overhead |
+|---|---|---|---|
+| **Binary Stream Decoding (`.keybin`)** | **~58,800 ops/ms** | **> 58.8 Million events/sec** | **Zero-Copy Streaming** |
+| **Binary Stream Encoding (`.keybin`)** | **~26,800 ops/ms** | **> 26.8 Million events/sec** | **Compact VarInt Delta Buffer** |
+
+*Run the benchmarks locally:* `.\run-benchmark.bat`
+
+---
+
+## API Quick Reference
+
+| Method / Class | Description |
+|---|---|
+| `new FastKeylogger(path, threshold)` | Creates a logger flushing every N records into timestamped `.keybin` files. |
+| `logger.start()` / `logger.stop()` | Starts and stops native raw keyboard event recording. |
+| `logger.addListener(listener)` | Subscribes to real-time typing events and dwell times. |
+| `KeybinCodec.encode(events)` | Serializes event list into compressed FastFileFormat binary byte array. |
+| `KeybinCodec.decode(bytes)` | Deserializes `.keybin` binary bytes back into `List<TypingEvent>`. |
+| `new TextReconstructor()` | Observer that maintains live reconstructed buffer with correction handling. |
+
+---
+
+## Technical Examples & Hero Demos
+
+| Case | Java Example | Launcher | Description |
+|---|---|---|---|
+| **Live Typing Streamer & Reconstructor** | [Demo.java](examples/Demo/src/main/java/fastkeylogger/demo/Demo.java) | `run-demo.bat` | 4-second live raw recording, dwell time logging, `.keybin` compression, and text reconstruction. |
+| **JMH Microbenchmark Suite** | [Benchmark.java](examples/Benchmark/src/main/java/fastkeylogger/benchmark/Benchmark.java) | `run-benchmark.bat` | High-throughput encoding/decoding benchmarks for 1,000-event telemetry streams. |
 
 ---
 
 ## Installation
 
-### Option 1: Maven (Recommended)
-
-Add the JitPack repository and the dependencies to your `pom.xml`:
+### Option 1: Maven (JitPack)
 
 ```xml
 <repositories>
@@ -75,17 +108,29 @@ Add the JitPack repository and the dependencies to your `pom.xml`:
 </repositories>
 
 <dependencies>
-    <!-- FastKeylogger Library -->
     <dependency>
         <groupId>com.github.andrestubbe</groupId>
         <artifactId>FastKeylogger</artifactId>
         <version>0.1.0</version>
     </dependency>
-
-    <!-- FastCore (Required Native Loader) -->
     <dependency>
         <groupId>com.github.andrestubbe</groupId>
-        <artifactId>FastCore</artifactId>
+        <artifactId>FastKeyboard</artifactId>
+        <version>0.1.0</version>
+    </dependency>
+    <dependency>
+        <groupId>com.github.andrestubbe</groupId>
+        <artifactId>FastFileFormat</artifactId>
+        <version>0.1.0</version>
+    </dependency>
+    <dependency>
+        <groupId>com.github.andrestubbe</groupId>
+        <artifactId>FastBinary</artifactId>
+        <version>0.1.0</version>
+    </dependency>
+    <dependency>
+        <groupId>com.github.andrestubbe</groupId>
+        <artifactId>fastcore</artifactId>
         <version>0.1.0</version>
     </dependency>
 </dependencies>
@@ -100,7 +145,10 @@ repositories {
 
 dependencies {
     implementation 'com.github.andrestubbe:FastKeylogger:0.1.0'
-    implementation 'com.github.andrestubbe:FastCore:0.1.0'
+    implementation 'com.github.andrestubbe:FastKeyboard:0.1.0'
+    implementation 'com.github.andrestubbe:FastFileFormat:0.1.0'
+    implementation 'com.github.andrestubbe:FastBinary:0.1.0'
+    implementation 'com.github.andrestubbe:fastcore:0.1.0'
 }
 ```
 
@@ -108,48 +156,48 @@ dependencies {
 
 Download the latest JARs directly to add them to your classpath:
 
-1. 📦 **[fastkeylogger-0.1.0.jar](https://github.com/andrestubbe/FastKeylogger/releases/download/0.1.0/fastkeylogger-0.1.0.jar)** (The Core Library)
-2. ⚙️ **[fastcore-0.1.0.jar](https://github.com/andrestubbe/FastCore/releases/download/0.1.0/fastcore-0.1.0.jar)** (The Mandatory Native Loader)
-
-> [!IMPORTANT]
-> All JARs must be in your classpath for the native JNI calls to function correctly.
+1. ⌨️ **[FastKeylogger-0.1.0.jar](https://github.com/andrestubbe/FastKeylogger/releases/download/0.1.0/FastKeylogger-0.1.0.jar)** (Typing Logger & Rhythm Engine)
+2. ⚡ **[FastKeyboard-0.1.0.jar](https://github.com/andrestubbe/FastKeyboard/releases/download/0.1.0/FastKeyboard-0.1.0.jar)** (Native Win32 Raw Keyboard Input)
+3. 📄 **[FastFileFormat-0.1.0.jar](https://github.com/andrestubbe/FastFileFormat/releases/download/0.1.0/FastFileFormat-0.1.0.jar)** (Dual Binary & Text File Format)
+4. ⚡ **[FastBinary-0.1.0.jar](https://github.com/andrestubbe/FastBinary/releases/download/0.1.0/FastBinary-0.1.0.jar)** (VarInt & Binary Packing)
+5. ⚙️ **[fastcore-0.1.0.jar](https://github.com/andrestubbe/FastCore/releases/download/0.1.0/fastcore-0.1.0.jar)** (Foundation Library)
 
 ---
 
-## API Reference
+## Documentation
 
-| Method | Description |
-|------------------------------------|------------------------------------------------|
-| `void start()` | Starts the underlying keyboard listener. |
-| `void stop()` | Stops the listener and releases resources. |
-| `void addListener(TypingListener)` | Registers a new observer for processed events. |
+* **[REFERENCE.md](docs/REFERENCE.md)**: Full API reference and method signatures.
+* **[PHILOSOPHY.md](docs/PHILOSOPHY.md)**: Architectural design principles and biometric rhythm telemetry.
+* **[CHANGELOG.md](docs/CHANGELOG.md)**: Release history and version notes.
+* **[ROADMAP.md](docs/ROADMAP.md)**: Future milestones and planned features.
+* **[COMPILE.md](docs/COMPILE.md)**: Instructions for compiling from source.
 
 ---
 
 ## Platform Support
 
-| Platform            | Status             |
-|---------------------|--------------------|
-| Windows 10/11 (x64) | ✅ Fully Supported  |
-| Linux               | 🚧 Planned         |
-| macOS               | 🚧 Planned         |
+| Platform | Status |
+|---|---|
+| Windows 10/11 (x64) | ✅ Fully Supported (Win32 Raw Input) |
+| Linux | 🚧 Planned (evdev) |
+| macOS | 🚧 Planned (CGEventTap) |
 
 ---
 
 ## License
 
-MIT License — See [LICENSE](LICENSE) file for details.
+MIT License. See [LICENSE](LICENSE) file for details.
 
 ---
 
 ## Related Projects
 
-- [FastCore](https://github.com/andrestubbe/FastCore) — Native Library Loader & JNI Utilities for Java
-- [FastKeyboard](https://github.com/andrestubbe/FastKeyboard) — Native Windows RawInput API for Java
-- [FastMouse](https://github.com/andrestubbe/FastMouse) — High-Performance Native Mouse API for Java
-- [FastHotkey](https://github.com/andrestubbe/FastHotkey) — Low-Latency Global Hotkey API for Java
-- [FastTouch](https://github.com/andrestubbe/FastTouch) — Native Touchscreen Input for Java
-- [FastStylus](https://github.com/andrestubbe/FastStylus) — Native Stylus/Pen Input for Java
+- [FastKeyboard](https://github.com/andrestubbe/FastKeyboard) — Low-level raw keyboard event interceptor
+- [FastMouseLogger](https://github.com/andrestubbe/FastMouseLogger) — Raw mouse event logger, `.mousebin` streaming & heatmaps
+- [FastHotkey](https://github.com/andrestubbe/FastHotkey) — High-speed global hotkey listener
+- [FastFileFormat](https://github.com/andrestubbe/FastFileFormat) — Universal dual-format binary & text document engine
+- [FastSharedMemory](https://github.com/andrestubbe/FastSharedMemory) — Zero-copy inter-process shared memory for Java
 
 ---
-**Part of the FastJava Ecosystem** — *Making the JVM faster. ⚡*
+
+**Part of the FastJava Ecosystem** — *Making the JVM faster. Small package. Maximum speed. Zero bloat. 🚀📋*

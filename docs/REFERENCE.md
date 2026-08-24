@@ -1,26 +1,22 @@
-# FastKeylogger Reference
+# FastKeylogger API Reference
 
-## 1. CPU Feature Model
-*   **AVX2** — detected via CPUID. Enables 32-byte vector ops.
-*   **SSE4.2** — detected via CPUID. 16-byte fallback.
-*   **Fallback rule**: AVX2 → SSE4.2 → scalar.
+## Core Classes
 
-## 2. Guarantees
-*   **Zero-Copy**: All operations use `GetPrimitiveArrayCritical` for direct memory access.
-*   **Unaligned Access**: Safe on all byte boundaries.
-*   **Thread-Safety**: All static native methods are thread-safe.
+### 1. `fastkeylogger.FastKeylogger`
+* `public FastKeylogger(Path outputDirectory, int bufferFlushThreshold)`: Creates background keylogger instance.
+* `public void start()`: Starts raw keyboard input hook thread.
+* `public void stop()`: Stops capture and flushes pending buffer.
+* `public void addListener(TypingListener listener)`: Registers typing callback.
+* `public void removeListener(TypingListener listener)`: Unregisters typing callback.
+* `public List<TypingEvent> getBufferedRecords()`: Returns current memory buffer snapshot.
+* `public void flush()`: Writes memory buffer to timestamped `.keybin` file.
 
-## 3. JNI & Memory Contracts
-*   **Direct Memory Pinning**: No implicit copies are made by the JNI bridge.
-*   **No Allocation**: All operations work on pre-allocated Java arrays or buffers.
-*   **Critical Sections**: Native calls minimize blocking to prevent GC impact.
+### 2. `fastkeylogger.KeybinCodec`
+* `public static byte[] encode(List<TypingEvent> events)`: Encodes events to FastFileFormat binary stream.
+* `public static List<TypingEvent> decode(byte[] bytes)`: Decodes `.keybin` binary payload.
+* `public static void writeToFile(Path path, List<TypingEvent> events)`: Writes events to file.
+* `public static List<TypingEvent> readFromFile(Path path)`: Reads events from file.
 
-## 4. Platform Support
-| Platform | Status |
-|----------|--------|
-| Windows 10/11 (x64) | ✅ Fully Supported |
-
----
-**Part of the FastJava Ecosystem** — *Making the JVM faster.*
-
-Made with ⚡ by Andre Stubbe
+### 3. `fastkeylogger.TextReconstructor`
+* `public String getText()`: Returns live reconstructed text string.
+* `public void clear()`: Resets reconstructed text buffer.

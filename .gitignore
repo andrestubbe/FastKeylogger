@@ -1,10 +1,9 @@
 target/
 *.class
+*.jar
 *.log
+logs/
 .idea/
 *.iml
-.classpath
-.project
-.settings/
-build/
-bin/
+.vscode/
+dependency-reduced-pom.xml
