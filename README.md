@@ -19,22 +19,30 @@
 ```java
 import fastkeylogger.*;
 import java.nio.file.Path;
+import java.util.List;
 
 public class Demo {
     public static void main(String[] args) throws Exception {
         Path logDir = Path.of("logs/keyboard");
+        TextReconstructor reconstructor = new TextReconstructor();
 
-        // 1. Initialize background raw keylogger
+        // 1. Live background capture
         try (FastKeylogger logger = new FastKeylogger(logDir, 5000)) {
+            logger.addListener(reconstructor);
             logger.addListener(event -> {
-                System.out.printf("Key '%c' [VK=0x%02X] dwell=%dms\n",
-                        event.character(), event.virtualKeyCode(), event.durationMs());
+                System.out.printf("Key '%c' dwell=%dms corr=%b\n",
+                        event.character(), event.durationMs(), event.isCorrection());
             });
 
             logger.start();
-            Thread.sleep(5000);
-            logger.stop(); // Flushes automatically to .keybin
+            Thread.sleep(4000);
+            logger.stop(); // Flushes to timestamped .keybin
         }
+
+        // 2. High-speed FastFileFormat codec & reconstructed text
+        Path sessionFile = logDir.resolve("session.keybin");
+        List<TypingEvent> events = KeybinCodec.readFromFile(sessionFile);
+        System.out.println("Reconstructed text: " + reconstructor.getText());
     }
 }
 ```
