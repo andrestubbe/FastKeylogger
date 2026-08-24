@@ -1,6 +1,6 @@
-# FastKeylogger 0.1.0 [ALPHA] — Native Raw Keystroke Logger, Typing Biometrics & Stream Compression
+# FastKeylogger 0.1.2 [ALPHA] — Native Raw Keystroke Logger, Typing Biometrics & Stream Compression
 
-[![Status](https://img.shields.io/badge/status-0.1.0-brightgreen.svg)](https://github.com/andrestubbe/FastKeylogger/releases/tag/0.1.0)
+[![Status](https://img.shields.io/badge/status-0.1.2-brightgreen.svg)](https://github.com/andrestubbe/FastKeylogger/releases/tag/0.1.2)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Java](https://img.shields.io/badge/Java-17+-blue.svg)](https://www.java.com)
 [![Platform](https://img.shields.io/badge/Platform-Windows%2010+-lightgrey.svg)]()
@@ -119,7 +119,7 @@ FastKeylogger is profiled using **JMH** to guarantee maximum stream throughput a
     <dependency>
         <groupId>com.github.andrestubbe</groupId>
         <artifactId>FastKeylogger</artifactId>
-        <version>0.1.0</version>
+        <version>0.1.2</version>
     </dependency>
     <dependency>
         <groupId>com.github.andrestubbe</groupId>
@@ -152,7 +152,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.andrestubbe:FastKeylogger:0.1.0'
+    implementation 'com.github.andrestubbe:FastKeylogger:0.1.2'
     implementation 'com.github.andrestubbe:FastKeyboard:0.1.0'
     implementation 'com.github.andrestubbe:FastFileFormat:0.1.0'
     implementation 'com.github.andrestubbe:FastBinary:0.1.0'
@@ -164,7 +164,7 @@ dependencies {
 
 Download the latest JARs directly to add them to your classpath:
 
-1. ⌨️ **[FastKeylogger-0.1.0.jar](https://github.com/andrestubbe/FastKeylogger/releases/download/0.1.0/FastKeylogger-0.1.0.jar)** (Typing Logger & Rhythm Engine)
+1. ⌨️ **[FastKeylogger-0.1.2.jar](https://github.com/andrestubbe/FastKeylogger/releases/download/0.1.2/FastKeylogger-0.1.2.jar)** (Typing Logger & Rhythm Engine)
 2. ⚡ **[FastKeyboard-0.1.0.jar](https://github.com/andrestubbe/FastKeyboard/releases/download/0.1.0/FastKeyboard-0.1.0.jar)** (Native Win32 Raw Keyboard Input)
 3. 📄 **[FastFileFormat-0.1.0.jar](https://github.com/andrestubbe/FastFileFormat/releases/download/0.1.0/FastFileFormat-0.1.0.jar)** (Dual Binary & Text File Format)
 4. ⚡ **[FastBinary-0.1.0.jar](https://github.com/andrestubbe/FastBinary/releases/download/0.1.0/FastBinary-0.1.0.jar)** (VarInt & Binary Packing)
