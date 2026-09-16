@@ -49,6 +49,44 @@ public class Demo {
 
 ---
 
+## Table of Contents
+
+- [Quick Start](#quick-start)
+- [Why FastKeylogger?](#why-fastkeylogger)
+- [Key Features](#key-features)
+- [Real-World Scenarios](#real-world-scenarios)
+- [Performance Benchmarks](#performance-benchmarks)
+- [API Quick Reference](#api-quick-reference)
+- [Technical Examples & Hero Demos](#technical-examples--hero-demos)
+- [Installation](#installation)
+- [Documentation](#documentation)
+- [Platform Support](#platform-support)
+- [Related Projects](#related-projects)
+- [License](#license)
+
+---
+
+## Why FastKeylogger?
+
+Standard Java input listeners (`java.awt.event.KeyListener`, Swing, JavaFX) are strictly application-focused and synthetic:
+
+- **Window Focus Requirement**: Standard Java only receives keystrokes when its own GUI window has active OS focus. Keystrokes in other applications are completely invisible.
+- **Lost Hardware Dynamics**: AWT collapses physical key transitions into high-level character typing events, discarding exact hardware dwell times (how long a key was physically held down) and flight times (inter-key pause duration).
+- **Text Stream Churn & Memory**: Naive text loggers generate massive GC allocations and bulky JSON/plaintext files that choke disk I/O during long sessions.
+
+**FastKeylogger** solves this by bridging hardware RawInput with binary serialization:
+
+| Feature | Java AWT / Swing | FastKeylogger |
+|---|:---:|:---:|
+| **Global Background Capture** | ❌ Focused Window Only | ✅ Global OS-Wide (Background) |
+| **Microsecond Dwell Time** | ❌ Lost | ✅ Precise Key Press Duration |
+| **Inter-Key Flight Time** | ❌ Unreliable / EDT Lag | ✅ Hardware-Exact Cadence |
+| **Correction & Backspace Analysis** | ❌ Manual Parsing | ✅ Built-in `TextReconstructor` |
+| **Storage Format** | Bloated Plaintext / JSON | **Compact `.keybin` (FastFileFormat)** |
+| **Decoding Throughput** | ~100k events/sec | **> 58.8 Million events/sec** |
+
+---
+
 ## Key Features
 
 - **⌨️ Win32 Raw Input Interception** — Sub-millisecond keystroke telemetry capturing raw scan codes and virtual keys via `FastKeyboard`.
@@ -83,14 +121,15 @@ FastKeylogger is profiled using **JMH** to guarantee maximum stream throughput a
 
 ## API Quick Reference
 
-| Method / Class | Description |
-|---|---|
-| `new FastKeylogger(path, threshold)` | Creates a logger flushing every N records into timestamped `.keybin` files. |
-| `logger.start()` / `logger.stop()` | Starts and stops native raw keyboard event recording. |
-| `logger.addListener(listener)` | Subscribes to real-time typing events and dwell times. |
-| `KeybinCodec.encode(events)` | Serializes event list into compressed FastFileFormat binary byte array. |
-| `KeybinCodec.decode(bytes)` | Deserializes `.keybin` binary bytes back into `List<TypingEvent>`. |
-| `new TextReconstructor()` | Observer that maintains live reconstructed buffer with correction handling. |
+| Method / Class | Return Type | Description | Docs |
+|---|---|---|---|
+| `new FastKeylogger(path, threshold)` | `FastKeylogger` | Creates a logger flushing every N records into timestamped `.keybin` files. | [Reference](docs/REFERENCE.md#1-fastkeyloggerfastkeylogger) |
+| `logger.start()` | `void` | Begins background raw keyboard input interception. | [Reference](docs/REFERENCE.md#1-fastkeyloggerfastkeylogger) |
+| `logger.stop()` | `void` | Stops capture and flushes pending memory records to disk. | [Reference](docs/REFERENCE.md#1-fastkeyloggerfastkeylogger) |
+| `logger.addListener(listener)` | `void` | Subscribes to real-time `TypingEvent` telemetry and rhythm callbacks. | [Reference](docs/REFERENCE.md#1-fastkeyloggerfastkeylogger) |
+| `KeybinCodec.encode(events)` | `byte[]` | Serializes typing events into compressed FastFileFormat binary byte array. | [Reference](docs/REFERENCE.md#2-fastkeyloggerkeybincodec) |
+| `KeybinCodec.decode(bytes)` | `List<TypingEvent>` | High-speed zero-copy deserialization from `.keybin` binary stream. | [Reference](docs/REFERENCE.md#2-fastkeyloggerkeybincodec) |
+| `reconstructor.getText()` | `String` | Returns live reconstructed text with backspace state handling. | [Reference](docs/REFERENCE.md#3-fastkeyloggertextreconstructor) |
 
 ---
 
