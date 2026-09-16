@@ -184,11 +184,11 @@ Download the latest JARs directly to add them to your classpath:
 
 ## Platform Support
 
-| Platform | Status |
-|---|---|
-| Windows 10/11 (x64) | ✅ Fully Supported (Win32 Raw Input) |
-| Linux | 🚧 Planned (evdev) |
-| macOS | 🚧 Planned (CGEventTap) |
+| Platform | Architecture | Status | Driver / Subsystem |
+|:---|:---:|:---:|:---|
+| **Windows 10 / 11** | x64 | ✅ Fully Supported | Native Win32 `WM_INPUT` (RawInput via `FastKeyboard`) |
+| **Linux** | x64 / AArch64 | 🚧 Planned | `evdev` / `libinput` Direct Hardware Event Stream |
+| **macOS** | Apple Silicon / x64 | 🚧 Planned | Quartz Event Taps (`CGEventTap`) |
 
 ---
 

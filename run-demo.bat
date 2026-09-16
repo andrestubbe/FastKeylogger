@@ -1,15 +1,29 @@
 @echo off
 setlocal
 cd /d "%~dp0"
-echo ===================================================
-echo  Building FastKeylogger & Running Live Demo
-echo ===================================================
 
-call "C:\Users\andre\tools\apache-maven-3.9.9\bin\mvn.cmd" compile
+echo [1/3] Building FastKeylogger...
+call mvn clean install -DskipTests -q
 if %ERRORLEVEL% NEQ 0 (
-    echo Build failed!
+    echo [ERROR] FastKeylogger build failed.
+    pause
     exit /b %ERRORLEVEL%
 )
 
-java -cp "target\classes;examples\Demo\src\main\java;%USERPROFILE%\.m2\repository\com\github\andrestubbe\fastcore\0.1.0\fastcore-0.1.0.jar;%USERPROFILE%\.m2\repository\com\github\andrestubbe\FastBinary\0.1.0\FastBinary-0.1.0.jar;%USERPROFILE%\.m2\repository\com\github\andrestubbe\FastFileFormat\0.1.0\FastFileFormat-0.1.0.jar;%USERPROFILE%\.m2\repository\com\github\andrestubbe\FastKeyboard\0.1.0\FastKeyboard-0.1.0.jar" fastkeylogger.demo.Demo
+powershell -NoProfile -Command "Unblock-File -Path '%USERPROFILE%\.fastcore\native\fastkeyboard\*', '%~dp0release\*' -ErrorAction SilentlyContinue" >nul 2>&1
+
+echo [2/3] Compiling Demo...
+cd examples\Demo
+call mvn compile dependency:build-classpath "-Dmdep.outputFile=cp.txt" "-DincludeScope=runtime" -q
+if %ERRORLEVEL% NEQ 0 (
+    echo [ERROR] Demo compilation failed.
+    pause
+    exit /b %ERRORLEVEL%
+)
+
+echo [3/3] Running Demo...
+set /p CP=<cp.txt
+java --enable-native-access=ALL-UNNAMED -cp "target\classes;%CP%" fastkeylogger.demo.Demo
+
+cd ..\..
 pause
