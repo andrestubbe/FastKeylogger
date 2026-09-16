@@ -77,7 +77,7 @@ Standard Java input listeners (`java.awt.event.KeyListener`, Swing, JavaFX) are 
 **FastKeylogger** solves this by bridging hardware RawInput with binary serialization:
 
 | Feature | Java AWT / Swing | FastKeylogger |
-|---|:---:|:---:|
+|:---|:---|:---|
 | **Global Background Capture** | ❌ Focused Window Only | ✅ Global OS-Wide (Background) |
 | **Microsecond Dwell Time** | ❌ Lost | ✅ Precise Key Press Duration |
 | **Inter-Key Flight Time** | ❌ Unreliable / EDT Lag | ✅ Hardware-Exact Cadence |
